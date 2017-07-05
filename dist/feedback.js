@@ -222,6 +222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.refs.scrBtn.addEventListener('click', function () {
 	        _this.painting = true;
 	        _this.refs.scrBtn.style.display = 'none';
+	        _this.refs.takeScrBtn.style.display = 'inline';
 	      });
 
 	      this.refs.takeScrBtn.addEventListener('click', function () {
