@@ -52,14 +52,14 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(1);
 
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -140,6 +140,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.refs.wrapper = document.getElementById('feedback-wrapper');
 	      this.refs.form = document.getElementById('feedback-form');
 	      this.refs.submitBtn = document.getElementById('feedback-submit-btn');
+	      this.refs.scrBtn = document.getElementById('feedback-scr-btn');
 	      this.refs.previewImg = document.getElementById('feedback-preview-img');
 	      this.refs.closeBtn = document.getElementById('feedback-close-btn');
 	      this.refs.note = document.getElementById('feedback-note');
@@ -215,6 +216,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.unmount();
 	      });
 
+	      this.refs.submitBtn.addEventListener('click', function () {
+	        _this.screenshot();
+	      });
+
 	      this.refs.canvas.addEventListener('mousedown', function (e) {
 	        _this.painting = true;
 	        _this.addClick(e.pageX, e.pageY);
@@ -232,7 +237,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      ['mouseup', 'mouseleave'].forEach(function (ev) {
 	        _this.refs.canvas.addEventListener(ev, function () {
 	          _this.painting = false;
-	          _this.screenshot();
+	          //this.screenshot();
 	        });
 	      });
 	    }
@@ -292,7 +297,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'getForm',
 	    value: function getForm() {
-	      return '\n     <div id="feedback-form" data-html2canvas-ignore>\n       <div class="panel panel-default">\n        <div class="panel-heading">Submit Feedback\n          <button id="feedback-close-btn" type="button" class="close" aria-label="Close">\n            <span aria-hidden="true">\xD7</span>\n          </button>\n        </div>\n        <div class="panel-body">\n         <div class="thumnbnail"><img id="feedback-preview-img"></div>\n\n         <form>\n          <div class="form-group">\n            <label for="feedback-note">Comment</label>\n            <textarea id="feedback-note" class="form-control"></textarea>\n          </div>\n          \n          <input id="feedback-submit-btn" type="button" class="btn btn-default" value="Submit" />\n         </form>\n        </div>\n      </div>\n     </div>\n    ';
+	      return '\n     <div id="feedback-form" data-html2canvas-ignore>\n       <div class="panel panel-default">\n        <div class="panel-heading">Submit Feedback\n          <button id="feedback-close-btn" type="button" class="close" aria-label="Close">\n            <span aria-hidden="true">\xD7</span>\n          </button>\n        </div>\n        <div class="panel-body">\n         <div class="thumnbnail"><img id="feedback-preview-img"></div>\n\n         <button id="feedback-scr-btn" type="button">Take Screenshot</button>\n\n         <form>\n          <div class="form-group">\n            <label for="feedback-note">Comment</label>\n            <textarea id="feedback-note" class="form-control"></textarea>\n          </div>\n          \n          <input id="feedback-submit-btn" type="button" class="btn btn-default" value="Submit" />\n         </form>\n        </div>\n      </div>\n     </div>\n    ';
 	    }
 	  }, {
 	    key: 'getWrapper',
@@ -317,15 +322,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'mount',
 	    value: function mount() {
-	      var _this4 = this;
-
 	      this.body.appendChild(dom.createNode('div', { id: 'feedback-wrapper' }, this.getWrapper()));
 	      this.setRefs();
 	      this.addHandlers();
 	      // Add small delay to allow UI to settle
-	      setTimeout(function () {
-	        _this4.screenshot();
-	      }, 500);
+	      //setTimeout(() => { this.screenshot(); }, 500);
 	    }
 	  }, {
 	    key: 'unmount',
@@ -342,9 +343,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = Feedback;
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, module) {/**
 	 * lodash (Custom Build) <https://lodash.com/>
@@ -2603,9 +2604,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(3)(module)))
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = function(module) {
 		if(!module.webpackPolyfill) {
@@ -2619,7 +2620,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;
