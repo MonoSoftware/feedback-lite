@@ -90,7 +90,7 @@ class Feedback {
       this.unmount();
     });
     
-    this.refs.submitBtn.addEventListener('click' () => {
+    this.refs.submitBtn.addEventListener('click', () => {
       this.screenshot();
     });
 
