@@ -140,7 +140,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.refs.wrapper = document.getElementById('feedback-wrapper');
 	      this.refs.form = document.getElementById('feedback-form');
 	      this.refs.submitBtn = document.getElementById('feedback-submit-btn');
+
 	      this.refs.scrBtn = document.getElementById('feedback-scr-btn');
+	      this.refs.takeScrBtn = document.getElementById('feedback-take-scr-btn');
+
 	      this.refs.previewImg = document.getElementById('feedback-preview-img');
 	      this.refs.closeBtn = document.getElementById('feedback-close-btn');
 	      this.refs.note = document.getElementById('feedback-note');
@@ -216,8 +219,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.unmount();
 	      });
 
-	      this.refs.submitBtn.addEventListener('click', function () {
+	      this.refs.scrBtn.addEventListener('click', function () {
+	        _this.painting = true;
+	        _this.refs.scrBtn.style.display = 'none';
+	      });
+
+	      this.refs.takeScrBtn.addEventListener('click', function () {
 	        _this.screenshot();
+	        _this.painting = false;
+	        _this.refs.scrBtn.style.display = 'inline';
+	        _this.refs.takeScrBtn.style.display = 'none';
 	      });
 
 	      this.refs.canvas.addEventListener('mousedown', function (e) {
@@ -297,7 +308,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'getForm',
 	    value: function getForm() {
-	      return '\n     <div id="feedback-form" data-html2canvas-ignore>\n       <div class="panel panel-default">\n        <div class="panel-heading">Submit Feedback\n          <button id="feedback-close-btn" type="button" class="close" aria-label="Close">\n            <span aria-hidden="true">\xD7</span>\n          </button>\n        </div>\n        <div class="panel-body">\n         <div class="thumnbnail"><img id="feedback-preview-img"></div>\n\n         <button id="feedback-scr-btn" type="button">Take Screenshot</button>\n\n         <form>\n          <div class="form-group">\n            <label for="feedback-note">Comment</label>\n            <textarea id="feedback-note" class="form-control"></textarea>\n          </div>\n          \n          <input id="feedback-submit-btn" type="button" class="btn btn-default" value="Submit" />\n         </form>\n        </div>\n      </div>\n     </div>\n    ';
+	      return '\n     <div id="feedback-form" data-html2canvas-ignore>\n       <div class="panel panel-default">\n        <div class="panel-heading">Submit Feedback\n          <button id="feedback-close-btn" type="button" class="close" aria-label="Close">\n            <span aria-hidden="true">\xD7</span>\n          </button>\n        </div>\n        <div class="panel-body">\n         <div class="thumnbnail"><img id="feedback-preview-img"></div>\n\n         <button id="feedback-scr-btn" type="button">Screenshot Mode</button>\n         <button id="feedback-take-scr-btn" style="display:none" type="button">Take Screenshot</button>\n\n         <form>\n          <div class="form-group">\n            <label for="feedback-note">Comment</label>\n            <textarea id="feedback-note" class="form-control"></textarea>\n          </div>\n          \n          <input id="feedback-submit-btn" type="button" class="btn btn-default" value="Submit" />\n         </form>\n        </div>\n      </div>\n     </div>\n    ';
 	    }
 	  }, {
 	    key: 'getWrapper',

@@ -39,7 +39,10 @@ class Feedback {
     this.refs.wrapper = document.getElementById('feedback-wrapper');
     this.refs.form = document.getElementById('feedback-form');
     this.refs.submitBtn = document.getElementById('feedback-submit-btn');
+
     this.refs.scrBtn = document.getElementById('feedback-scr-btn');
+    this.refs.takeScrBtn = document.getElementById('feedback-take-scr-btn');
+
     this.refs.previewImg = document.getElementById('feedback-preview-img');
     this.refs.closeBtn = document.getElementById('feedback-close-btn');
     this.refs.note = document.getElementById('feedback-note');
@@ -90,8 +93,17 @@ class Feedback {
       this.unmount();
     });
     
-    this.refs.submitBtn.addEventListener('click', () => {
+    this.refs.scrBtn.addEventListener('click', () => {
+      this.painting = true;
+      this.refs.scrBtn.style.display = 'none';
+      this.refs.takeScrBtn.style.display = 'inline';
+    });
+
+    this.refs.takeScrBtn.addEventListener('click', () => {
       this.screenshot();
+      this.painting = false;
+      this.refs.scrBtn.style.display = 'inline';
+      this.refs.takeScrBtn.style.display = 'none';
     });
 
     this.refs.canvas.addEventListener('mousedown', (e) => {
@@ -173,7 +185,8 @@ class Feedback {
         <div class="panel-body">
          <div class="thumnbnail"><img id="feedback-preview-img"></div>
 
-         <button id="feedback-scr-btn" type="button">Take Screenshot</button>
+         <button id="feedback-scr-btn" type="button">Screenshot Mode</button>
+         <button id="feedback-take-scr-btn" style="display:none" type="button">Take Screenshot</button>
 
          <form>
           <div class="form-group">
