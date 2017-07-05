@@ -39,6 +39,7 @@ class Feedback {
     this.refs.wrapper = document.getElementById('feedback-wrapper');
     this.refs.form = document.getElementById('feedback-form');
     this.refs.submitBtn = document.getElementById('feedback-submit-btn');
+    this.refs.scrBtn = document.getElementById('feedback-scr-btn');
     this.refs.previewImg = document.getElementById('feedback-preview-img');
     this.refs.closeBtn = document.getElementById('feedback-close-btn');
     this.refs.note = document.getElementById('feedback-note');
@@ -88,6 +89,10 @@ class Feedback {
     this.refs.closeBtn.addEventListener('click', () => {
       this.unmount();
     });
+    
+    this.refs.submitBtn.addEventListener('click' () => {
+      this.screenshot();
+    });
 
     this.refs.canvas.addEventListener('mousedown', (e) => {
       this.painting = true;
@@ -106,7 +111,7 @@ class Feedback {
     ['mouseup', 'mouseleave'].forEach((ev) => {
       this.refs.canvas.addEventListener(ev, () => {
         this.painting = false;
-        this.screenshot();
+        //this.screenshot();
       });
     });
   }
@@ -168,6 +173,8 @@ class Feedback {
         <div class="panel-body">
          <div class="thumnbnail"><img id="feedback-preview-img"></div>
 
+         <button id="feedback-scr-btn" type="button">Take Screenshot</button>
+
          <form>
           <div class="form-group">
             <label for="feedback-note">Comment</label>
@@ -205,7 +212,7 @@ class Feedback {
     this.setRefs();
     this.addHandlers();
     // Add small delay to allow UI to settle
-    setTimeout(() => { this.screenshot(); }, 500);
+    //setTimeout(() => { this.screenshot(); }, 500);
   }
 
   unmount() {
