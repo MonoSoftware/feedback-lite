@@ -96,7 +96,7 @@ class Feedback {
     this.refs.scrBtn.addEventListener('click', () => {
       this.painting = true;
 
-      const overlayEl = getElementById('feedback-wrapper');
+      const overlayEl = document.getElementById('feedback-wrapper');
       overlayEl.style.display = 'inline';
 
       this.refs.scrBtn.style.display = 'none';
@@ -107,7 +107,7 @@ class Feedback {
       this.screenshot();
       this.painting = false;
 
-      const overlayEl  = getElementById('feedback-wrapper');
+      const overlayEl  = document.getElementById('feedback-wrapper');
       overlayEl.style.display = 'none';
 
       this.refs.scrBtn.style.display = 'inline';
@@ -231,7 +231,7 @@ class Feedback {
   mount() {
     this.body.appendChild(dom.createNode('div', { id: 'feedback-wrapper' }, this.getWrapper()));
 
-    const overlayEl = getElementById('feedback-wrapper');
+    const overlayEl = document.getElementById('feedback-wrapper');
     overlayEl.style.display = 'none';
 
     this.setRefs();
