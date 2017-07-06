@@ -95,6 +95,10 @@ class Feedback {
     
     this.refs.scrBtn.addEventListener('click', () => {
       this.painting = true;
+
+      const overlayEl = getElementById('feedback-wrapper');
+      overlayEl.style.display = 'inline';
+
       this.refs.scrBtn.style.display = 'none';
       this.refs.takeScrBtn.style.display = 'inline';
     });
@@ -102,6 +106,10 @@ class Feedback {
     this.refs.takeScrBtn.addEventListener('click', () => {
       this.screenshot();
       this.painting = false;
+
+      const overlayEl  = getElementById('feedback-wrapper');
+      overlayEl.style.display = 'none';
+
       this.refs.scrBtn.style.display = 'inline';
       this.refs.takeScrBtn.style.display = 'none';
     });
@@ -222,6 +230,10 @@ class Feedback {
 
   mount() {
     this.body.appendChild(dom.createNode('div', { id: 'feedback-wrapper' }, this.getWrapper()));
+
+    const overlayEl = getElementById('feedback-wrapper');
+    overlayEl.style.display = 'none';
+
     this.setRefs();
     this.addHandlers();
     // Add small delay to allow UI to settle
