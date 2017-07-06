@@ -221,6 +221,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      this.refs.scrBtn.addEventListener('click', function () {
 	        _this.painting = true;
+
+	        var overlayEl = getElementById('feedback-wrapper');
+	        overlayEl.style.display = 'inline';
+
 	        _this.refs.scrBtn.style.display = 'none';
 	        _this.refs.takeScrBtn.style.display = 'inline';
 	      });
@@ -228,6 +232,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.refs.takeScrBtn.addEventListener('click', function () {
 	        _this.screenshot();
 	        _this.painting = false;
+
+	        var overlayEl = getElementById('feedback-wrapper');
+	        overlayEl.style.display = 'none';
+
 	        _this.refs.scrBtn.style.display = 'inline';
 	        _this.refs.takeScrBtn.style.display = 'none';
 	      });
@@ -335,6 +343,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'mount',
 	    value: function mount() {
 	      this.body.appendChild(dom.createNode('div', { id: 'feedback-wrapper' }, this.getWrapper()));
+
+	      var overlayEl = getElementById('feedback-wrapper');
+	      overlayEl.style.display = 'none';
+
 	      this.setRefs();
 	      this.addHandlers();
 	      // Add small delay to allow UI to settle
