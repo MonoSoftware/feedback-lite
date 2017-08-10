@@ -39,7 +39,10 @@ class Feedback {
     this.refs.wrapper = document.getElementById('feedback-wrapper');
     this.refs.form = document.getElementById('feedback-form');
     this.refs.submitBtn = document.getElementById('feedback-submit-btn');
+
     this.refs.scrBtn = document.getElementById('feedback-scr-btn');
+    this.refs.takeScrBtn = document.getElementById('feedback-take-scr-btn');
+
     this.refs.previewImg = document.getElementById('feedback-preview-img');
     this.refs.closeBtn = document.getElementById('feedback-close-btn');
     this.refs.note = document.getElementById('feedback-note');
@@ -49,6 +52,11 @@ class Feedback {
     this.refs.canvas.width = window.innerWidth;
 
     this.context = this.refs.canvas.getContext('2d');
+    
+    this.screenshotMode = false;
+        
+    var canvasEl = document.getElementById('feedback-canvas');
+    canvasEl.style.cursor = 'auto';
   }
 
   submitData() {
@@ -91,14 +99,41 @@ class Feedback {
     });
     
     this.refs.scrBtn.addEventListener('click', () => {
-      this.screenshot();
+        this.screenshotMode = true;
+        
+        var canvasEl = document.getElementById('feedback-canvas');
+        canvasEl.style.cursor = 'crosshair';
+
+        var wrapperEl = document.getElementById('feedback-wrapper');
+        wrapperEl.classList.add('feedback-scr-mode');
+      
+        this.refs.scrBtn.style.display = 'none';
+        this.refs.takeScrBtn.style.display = 'inline';
+    });
+
+    this.refs.takeScrBtn.addEventListener('click', () => {
+        this.refs.scrBtn.style.display = 'inline';
+        this.refs.takeScrBtn.style.display = 'none';
+      
+        var wrapperEl = document.getElementById('feedback-wrapper');
+        if (wrapperEl.classList.contains('feedback-scr-mode')) {
+          wrapperEl.classList.remove('feedback-scr-mode');
+        }
+
+        var canvasEl = document.getElementById('feedback-canvas');
+        canvasEl.style.cursor = 'auto';
+      
+        this.screenshot();
+        this.screenshotMode = false;
     });
 
     this.refs.canvas.addEventListener('mousedown', (e) => {
-      this.painting = true;
-      this.addClick(e.pageX, e.pageY);
+        if (this.screenshotMode) {
+          this.painting = true;
+          this.addClick(e.pageX, e.pageY);
 
-      this.redraw();
+          this.redraw();
+        }
     });
 
     this.refs.canvas.addEventListener('mousemove', (e) => {
@@ -174,6 +209,7 @@ class Feedback {
          <div class="thumnbnail"><img id="feedback-preview-img"></div>
 
          <button id="feedback-scr-btn" type="button">Take Screenshot</button>
+         <button id="feedback-take-scr-btn" style="display:none" type="button">Save Screenshot</button>
 
          <form>
           <div class="form-group">
@@ -209,6 +245,7 @@ class Feedback {
 
   mount() {
     this.body.appendChild(dom.createNode('div', { id: 'feedback-wrapper' }, this.getWrapper()));
+
     this.setRefs();
     this.addHandlers();
     // Add small delay to allow UI to settle
