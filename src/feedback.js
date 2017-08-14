@@ -84,6 +84,7 @@ class Feedback {
 
     if (this.ssCanvas) {
       data.img = this.ssCanvas.toDataURL();
+      this.ssCanvas = null;
     }
 
     this.opts.onSubmit(data);

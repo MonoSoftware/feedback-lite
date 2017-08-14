@@ -155,6 +155,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.context = this.refs.canvas.getContext('2d');
 
 	      this.screenshotMode = false;
+
+	      var canvasEl = document.getElementById('feedback-canvas');
+	      canvasEl.style.cursor = 'auto';
 	    }
 	  }, {
 	    key: 'submitData',
@@ -204,6 +207,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      if (this.ssCanvas) {
 	        data.img = this.ssCanvas.toDataURL();
+	        this.ssCanvas = null;
 	      }
 
 	      this.opts.onSubmit(data);
@@ -224,16 +228,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.refs.scrBtn.addEventListener('click', function () {
 	        _this.screenshotMode = true;
 
+	        var canvasEl = document.getElementById('feedback-canvas');
+	        canvasEl.style.cursor = 'crosshair';
+
+	        var wrapperEl = document.getElementById('feedback-wrapper');
+	        wrapperEl.classList.add('feedback-scr-mode');
+
 	        _this.refs.scrBtn.style.display = 'none';
 	        _this.refs.takeScrBtn.style.display = 'inline';
 	      });
 
 	      this.refs.takeScrBtn.addEventListener('click', function () {
-	        _this.screenshot();
-
 	        _this.refs.scrBtn.style.display = 'inline';
 	        _this.refs.takeScrBtn.style.display = 'none';
 
+	        var wrapperEl = document.getElementById('feedback-wrapper');
+	        if (wrapperEl.classList.contains('feedback-scr-mode')) {
+	          wrapperEl.classList.remove('feedback-scr-mode');
+	        }
+
+	        var canvasEl = document.getElementById('feedback-canvas');
+	        canvasEl.style.cursor = 'auto';
+
+	        _this.screenshot();
 	        _this.screenshotMode = false;
 	      });
 
@@ -316,7 +333,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'getForm',
 	    value: function getForm() {
-	      return '\n     <div id="feedback-form" data-html2canvas-ignore>\n       <div class="panel panel-default">\n        <div class="panel-heading">Submit Feedback\n          <button id="feedback-close-btn" type="button" class="close" aria-label="Close">\n            <span aria-hidden="true">\xD7</span>\n          </button>\n        </div>\n        <div class="panel-body">\n         <div class="thumnbnail"><img id="feedback-preview-img"></div>\n\n         <button id="feedback-scr-btn" type="button">Screenshot Mode</button>\n         <button id="feedback-take-scr-btn" style="display:none" type="button">Take Screenshot</button>\n\n         <form>\n          <div class="form-group">\n            <label for="feedback-note">Comment</label>\n            <textarea id="feedback-note" class="form-control"></textarea>\n          </div>\n          \n          <input id="feedback-submit-btn" type="button" class="btn btn-default" value="Submit" />\n         </form>\n        </div>\n      </div>\n     </div>\n    ';
+	      return '\n     <div id="feedback-form" data-html2canvas-ignore>\n       <div class="panel panel-default">\n        <div class="panel-heading">Submit Feedback\n          <button id="feedback-close-btn" type="button" class="close" aria-label="Close">\n            <span aria-hidden="true">\xD7</span>\n          </button>\n        </div>\n        <div class="panel-body">\n         <div class="thumnbnail"><img id="feedback-preview-img"></div>\n\n         <button id="feedback-scr-btn" type="button">Take Screenshot</button>\n         <button id="feedback-take-scr-btn" style="display:none" type="button">Save Screenshot</button>\n\n         <form>\n          <div class="form-group">\n            <label for="feedback-note">Comment</label>\n            <textarea id="feedback-note" class="form-control"></textarea>\n          </div>\n          \n          <input id="feedback-submit-btn" type="button" class="btn btn-default" value="Submit" />\n         </form>\n        </div>\n      </div>\n     </div>\n    ';
 	    }
 	  }, {
 	    key: 'getWrapper',
